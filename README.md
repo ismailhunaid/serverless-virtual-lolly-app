@@ -1,99 +1,152 @@
-<!-- AUTO-GENERATED-CONTENT:START (STARTER) -->
-<p align="center">
-  <a href="https://www.gatsbyjs.com">
-    <img alt="Gatsby" src="https://www.gatsbyjs.com/Gatsby-Monogram.svg" width="60" />
-  </a>
-</p>
-<h1 align="center">
-  Gatsby's hello-world starter
-</h1>
+step continues ...
 
-Kick off your project with this hello-world boilerplate. This starter ships with the main Gatsby configuration files you might need to get up and running blazing fast with the blazing fast app generator for React.
+step 1
+gatsby with netlify serverless functions
+installation
+npm install -g gatsby-cli
+gatsby new [projectName] [url]
+gatsby develop
+then
+signup to netlify
+npm install -g yarn
+npm install -g netlify-cli
+then
+netlify.toml file on the root we dont need toml file if we are using netlify dev only it works without toml file 
+netlify login
+netlify logout
+netlify dev --live
+netlify link
+netlify unlink
+netlify deploy --prod
+netlify status
+then CICD with github and netlify will do CICD for us . This is  automatic process of deploying
+go to github ,
+make a repo of you project connect this repo with netlfy dashboard then it will done CICD for us 
+we can deploy react and gatsby both
+but i am practicing here for gatsby only 
+[build]
+command="yarn build"
+publish="build/"
+publish="public/"
+functions="functions/"
 
-_Have another more specific idea? You may want to check out our vibrant collection of [official and community-created starters](https://www.gatsbyjs.com/docs/gatsby-starters/)._
+step 2 move forward to netlify serverless functions how we can add serverside code in single place 
+1) create a folder and name it  as functions
+2) in toml file type functions="functions/"
+2) type command => netlify functions:create hello
+3)  [build]
+        command="yarn build"
+        publish="build/"
+        publish="public/"
+        functions="functions/"
+4) check this 
+http://localhost:8888/.netlify/functions/hello
 
-## 🚀 Quick start
+5) fetch data from client with useEffect to the server  
 
-1.  **Create a Gatsby site.**
+step 3 now add faunaDb to serverless functions
+ refer to project 12  for faunadb with serverless crud APP only no graphQL 
+here is the installation guide only
 
-    Use the Gatsby CLI to create a new site, specifying the hello-world starter.
+1) serverless + faunaDB CRUD Application
+2) npm install faunadb  fauna db driver installation
+3) const faunadb = require("faunadb") 
+4) q = faunadb.query
+5) const adminClient = new faunadb.Client ({ secret: "})>
+6) const serverClient = new faunadb.Client({ secret:  })
+7) use full links
+8) npm init inside functions directory 
+9) crud app using serverless and faunadb and gatsby.js 
+10) first i have done hard coded crud for testing then using gatsby client for crud 
+11) hard coded server side done 
+12) moving toward dynamic way from client side 
+13) crud operation from gatbsy client 
+14) read done
+15) addCountries done
+16) delete 
+17) update is pending  koi waat nai 
 
-    ```shell
-    # create a new Gatsby site using the hello-world starter
-    gatsby new my-hello-world-starter https://github.com/gatsbyjs/gatsby-starter-hello-world
-    ```
+https://github.com/panacloud-modern-global-apps/jamstack-serverless
 
-1.  **Start developing.**
+link https://docs.fauna.com/fauna/current/tutorials/crud?lang=javascript
 
-    Navigate into your new site’s directory and start it up.
+https://www.netlify.com/docs/functions/#the-handler-method
 
-    ```shell
-    cd my-hello-world-starter/
-    gatsby develop
-    ```
+https://docs.fauna.com/fauna/current/drivers/javascript
 
-1.  **Open the source code and start editing!**
+ step 4 now add GraphQl + faunaDB + serverless + Gatsby 
+  see panacloud repo step 23 and 23 for syntax of runtime query provider wrap root element
+ step 4 is in project 13 
 
-    Your site is now running at `http://localhost:8000`!
+*) repeat above steps to set project
+*) create netlify.toml file
+*) functions folder create
+*) faunadb and serverless functions are done 
+*) now add grapghQl to our serverless functions 
+*) we need apollo client and apollo server to use graphQl  on run time not build time here we can use graphQl on build time also 
+*) in gatsby , frontend , we have to do this
+*) npm install @apollo/client
+*) inside src folder make a folder named apollo 
+*) make two files client.js and wrap-root-element.js
+*) configure these  two files  see  these two files for configuration
+*) provide wrapRootElement  to Two files gatsby-ssr.js and gatbsy-browser.js
+*) export {wrapRootElement} from './src/apollo/wrap-root-element' two places 
+*) npm install cross-fetch 
+*) import fetch from cross-fetch
+*) see syntax from previous projects 
+*) now move to serverless functions
+*) we have to work on server side with three things apollo server lamda graphql , serverless, and faunadb so install all this 
+*) netlify functions:create todo
+*) select apollo-grapghQl from the options
+*) it will create apollo-server-lamda template for us 
+*) npm install apollo-server-lamda  and graphql
+*) npm install faunadb
+*) install dotenv 
+*) npm init and npm install 
+*) we have done with basic configuration and installtion 
+*) move on to make a todo app 
+*) first done serverside code with faunadb get create update and delete
+*) then from client side query all todos , add todos , update and delete todos 
+*)  project done 
+*) important link for netlify ADD ONS  https://docs.fauna.com/fauna/current/integrations/netlify.html
+*) book marking App  project14
+*) four important things  faunadb Graphql netlify Serverless Gatsby 
 
-    _Note: You'll also see a second link: _`http://localhost:8000/___graphql`_. This is a tool you can use to experiment with querying your data. Learn more about using this tool in the [Gatsby tutorial](https://www.gatsbyjs.com/tutorial/part-five/#introducing-graphiql)._
 
-    Open the `my-hello-world-starter` directory in your code editor of choice and edit `src/pages/index.js`. Save your changes and the browser will update in real time!
+step 5  just summarize how to setup our project in simple steps details covered above 
+ front End side installation 
+1) create netlify.toml file 
+2) npm install @apollo/client graphql
+3) create apollo folder and create client.js file and wrap-root-element.js
+4) configure gatsbybrowser.js file and gatsby-ssr.js file
+5) npm install cross-fetch 
+6) import fetch from cross-fetch
+5) see syntax from previous projects 
+6) npm install dotenv 
 
-## 🧐 What's inside?
+    In  the back end side server side 
+1) set up collections or database in fauna db 
+2) secret key 
+3) create index
+4) create a folder named it with functions
+5) npm install faunadb const faunadb = require("faunadb) q= faunadb.query const adminClient= new faunadb.Client({secret:""hhhhhhf"})
+6) netlify functions:create hello choose graphql fauna
+7) npm init 
+8) npm install apollo-server-lambda
+9) npm install dotenv
+10) 
 
-A quick look at the top-level files and directories you'll see in a Gatsby project.
+10) inside functions folder we dont need any dependencies we need only package.json file 
+11) we need all dependencies on the root  we can install all dependencies on the root 
 
-    .
-    ├── node_modules
-    ├── src
-    ├── .gitignore
-    ├── .prettierrc
-    ├── gatsby-browser.js
-    ├── gatsby-config.js
-    ├── gatsby-node.js
-    ├── gatsby-ssr.js
-    ├── LICENSE
-    ├── package-lock.json
-    ├── package.json
-    └── README.md
-
-1.  **`/node_modules`**: This directory contains all of the modules of code that your project depends on (npm packages) are automatically installed.
-
-2.  **`/src`**: This directory will contain all of the code related to what you will see on the front-end of your site (what you see in the browser) such as your site header or a page template. `src` is a convention for “source code”.
-
-3.  **`.gitignore`**: This file tells git which files it should not track / not maintain a version history for.
-
-4.  **`.prettierrc`**: This is a configuration file for [Prettier](https://prettier.io/). Prettier is a tool to help keep the formatting of your code consistent.
-
-5.  **`gatsby-browser.js`**: This file is where Gatsby expects to find any usage of the [Gatsby browser APIs](https://www.gatsbyjs.com/docs/browser-apis/) (if any). These allow customization/extension of default Gatsby settings affecting the browser.
-
-6.  **`gatsby-config.js`**: This is the main configuration file for a Gatsby site. This is where you can specify information about your site (metadata) like the site title and description, which Gatsby plugins you’d like to include, etc. (Check out the [config docs](https://www.gatsbyjs.com/docs/gatsby-config/) for more detail).
-
-7.  **`gatsby-node.js`**: This file is where Gatsby expects to find any usage of the [Gatsby Node APIs](https://www.gatsbyjs.com/docs/node-apis/) (if any). These allow customization/extension of default Gatsby settings affecting pieces of the site build process.
-
-8.  **`gatsby-ssr.js`**: This file is where Gatsby expects to find any usage of the [Gatsby server-side rendering APIs](https://www.gatsbyjs.com/docs/ssr-apis/) (if any). These allow customization of default Gatsby settings affecting server-side rendering.
-
-9.  **`LICENSE`**: This Gatsby starter is licensed under the 0BSD license. This means that you can see this file as a placeholder and replace it with your own license.
-
-10. **`package-lock.json`** (See `package.json` below, first). This is an automatically generated file based on the exact versions of your npm dependencies that were installed for your project. **(You won’t change this file directly).**
-
-11. **`package.json`**: A manifest file for Node.js projects, which includes things like metadata (the project’s name, author, etc). This manifest is how npm knows which packages to install for your project.
-
-12. **`README.md`**: A text file containing useful reference information about your project.
-
-## 🎓 Learning Gatsby
-
-Looking for more guidance? Full documentation for Gatsby lives [on the website](https://www.gatsbyjs.com/). Here are some places to start:
-
-- **For most developers, we recommend starting with our [in-depth tutorial for creating a site with Gatsby](https://www.gatsbyjs.com/tutorial/).** It starts with zero assumptions about your level of ability and walks through every step of the process.
-
-- **To dive straight into code samples, head [to our documentation](https://www.gatsbyjs.com/docs/).** In particular, check out the _Guides_, _API Reference_, and _Advanced Tutorials_ sections in the sidebar.
-
-## 💫 Deploy
-
-[Build, Deploy, and Host On The Only Cloud Built For Gatsby](https://www.gatsbyjs.com/cloud/)
-
-Gatsby Cloud is an end-to-end cloud platform specifically built for the Gatsby framework that combines a modern developer experience with an optimized, global edge network.
-
-<!-- AUTO-GENERATED-CONTENT:END -->
+step 6 Virtual lolly App 
+1) what we need 
+2) svg image  
+3) we can also direct import svg image like this <img src={image}> but we have to customized lolly 
+4) convert svg to our customized component and change html to JSX https://transform.tools/html-to-jsx
+5) import global css to gatsby-browser.js to use globally
+6) frontend for lolly pop
+7) repeat steps for serverless faunadb and grapghql
+8) create toml fil
+9)  install all dependencies
+10) basic dependencies are 
