@@ -3,6 +3,9 @@ import Header from '../components/Header'
 import { useMutation } from '@apollo/client'
 import gql from 'graphql-tag';
 import LollyComponent from '../components/LollyComponent'
+import lollyTemplate from '../templates/lollyTemplate'
+import shortid from 'shortid'
+import { navigate } from 'gatsby-link';
 
 const CREATE_LOLLY = gql`
  mutation createLolly($input:CreateLollyInput){
@@ -25,8 +28,7 @@ const CREATE_LOLLY = gql`
 
 
 const CreateNew = () => {
-  const [createNewLolly] = useMutation(CREATE_LOLLY)
-
+    const [createNewLolly] = useMutation(CREATE_LOLLY)
 
     const [colorTop, setColorTop] = useState('red')
     const [colorMiddle, setColorMiddle] = useState('green')
@@ -35,25 +37,36 @@ const CreateNew = () => {
     const messageRef = useRef();
     const senderNameRef = useRef();
 
-    const createLollyForm =  async () => {
+    const id= shortid.generate()
+    
+    const createLollyForm = async () => {
+        
         console.log('clicked')
         const result = await createNewLolly({
-            variables:{
-                input:{
-                    receiverName:receiverNameRef.current.value,
-                    senderName:senderNameRef.current.value,
-                    message:messageRef.current.value,
-                    lollyTop:colorTop,
-                    lollyMiddle:colorMiddle,
-                    lollyBottom:colorBottom,
-                    lollyPath:"Abc"
+            variables: {
+                input: {
+                    receiverName: receiverNameRef.current.value,
+                    senderName: senderNameRef.current.value,
+                    message: messageRef.current.value,
+                    lollyTop: colorTop,
+                    lollyMiddle: colorMiddle,
+                    lollyBottom: colorBottom,
+                    lollyPath:id
                     
+
                 }
             }
         }); console.log(result)
-    }
         
-       
+         
+    };
+   
+    
+    
+    
+    
+
+
 
 
 
@@ -101,7 +114,7 @@ const CreateNew = () => {
                             ref={receiverNameRef} />
                         <label htmlFor="message"> Message
                         </label>
-                        <textarea rows="15" columns="35"  name="message" ref={messageRef} >
+                        <textarea rows="15" columns="35" name="message" ref={messageRef} >
 
                         </textarea>
 
@@ -112,12 +125,19 @@ const CreateNew = () => {
 
                     </div>
                     <input type="button" value="SEND" onClick={createLollyForm} />
+
+                    <input type="button" value="page" onClick={()=>navigate(`/lollies/${id}`)} />
+
                     
+                    
+                    
+
 
                 </div>
 
             </div>
-          
+            <lollyTemplate />
+
         </div>
 
 

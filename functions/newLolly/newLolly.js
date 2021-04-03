@@ -55,6 +55,7 @@ Mutation: {
     console.log(args)
     try {
       const adminClient = new faunadb.Client({ secret: process.env.ADMIN_KEY_SECRET })
+      
       const shortID = shortid.generate()
       args.input.lollyPath = shortID
 
@@ -63,7 +64,7 @@ Mutation: {
           q.Collection('lollies'),
           {
             data: {
-              lollyPath: shortID,
+              lollyPath:shortID,
               ...args.input
 
             }

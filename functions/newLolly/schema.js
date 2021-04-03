@@ -17,7 +17,7 @@ type Lolly {
     lollyTop:String!
     lollyMiddle:String!
     lollyBottom:String!
-    lollyPath:String
+    lollyPath:String!
 
 }
 type Mutation {
@@ -31,7 +31,7 @@ input CreateLollyInput {
     lollyTop:String!
     lollyMiddle:String!
     lollyBottom:String!
-    lollyPath:String
+    lollyPath:String!
 
 }
 
